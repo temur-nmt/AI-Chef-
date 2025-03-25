@@ -4,7 +4,7 @@ const Header = () => {
     return(
         <header className='claude-header'>
             <img src={claudeLogo} alt="chef-claude-logo" className='claude-logo'/>
-            <p className='claude-name'>Chef Claude</p>
+            <p className='claude-name'>Chef Mistral</p>
         </header>
     )
 }

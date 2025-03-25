@@ -1,6 +1,8 @@
 import { useState } from "react"
 import IngredientList from './IngredientList'
 import ClaudeRecipe from "./ClaudeRecipe"
+// @ts-ignore
+import { getRecipeFromMistral } from '../ai.js'
 
 const Form = () => {
     // state for clearing the input
@@ -8,7 +10,7 @@ const Form = () => {
     // state for saving all inputs
     const [ingredient, setIngredient] = useState<string[]>([])
     // state for showing the recipe
-    const [recipeShown, setRecipeShown] = useState(false)
+    const [recipe, setRecipe] = useState("")
     // maps all ingredients to actuall html elements
     const ingredientsListItems = ingredient.map((el) => 
         <li key={el}>{el}</li>
@@ -41,8 +43,9 @@ const Form = () => {
     /*
         Shows Recipe when Button is pressed
     */
-    const toggleRecipeShown = () => {
-        setRecipeShown(prevState => !prevState)
+    async function getRecipe() {
+        const recipeMarkdown = await getRecipeFromMistral(ingredient)
+        setRecipe(recipeMarkdown)
     }
     
     return (
@@ -62,9 +65,9 @@ const Form = () => {
                 <button className="form-button"> + Add ingredient</button>
             </form>
             {/*Entire list transferred to a new Component for better readability, triggered by ingredient State of the parent*/}
-            {ingredient.length > 0 ? <IngredientList ingredients={ingredient} ingredientList={ingredientsListItems} toggleRecipeShown={toggleRecipeShown}/> : null}
+            {ingredient.length > 0 ? <IngredientList ingredients={ingredient} ingredientList={ingredientsListItems} getRecipe={getRecipe}/> : null}
             {/* Entire Recipe section in new Component, it is triggered by the IngredientLists Button and the recipeShow State of the parent */}
-            {recipeShown ? <ClaudeRecipe/>: null}
+            {recipe ? <ClaudeRecipe recipe={recipe}/>: null}
         </main>
     )
 }

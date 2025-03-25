@@ -3,11 +3,11 @@ import React from "react";
 interface IngredientListProps {
     ingredients: string[];
     ingredientList: React.JSX.Element[];
-    toggleRecipeShown: () => void;
+    getRecipe: () => void;
 }
 
 
-const IngredientList = ({ingredients, ingredientList, toggleRecipeShown}: IngredientListProps) => {
+const IngredientList = ({ingredients, ingredientList, getRecipe}: IngredientListProps) => {
 
     return(
         <section>    
@@ -20,7 +20,7 @@ const IngredientList = ({ingredients, ingredientList, toggleRecipeShown}: Ingred
                     <h3>Ready for a Recipe?</h3>
                     <p>Generate a recipe from your list of ingredients.</p>
                 </div>
-                <button className="recipe-btn" onClick={toggleRecipeShown}>Get a recipe</button>
+                <button className="recipe-btn" onClick={getRecipe}>Get a recipe</button>
             </div> : null} 
         </section>
     )
