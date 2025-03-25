@@ -7,7 +7,7 @@ interface ClaudeRecipeProps {
 const ClaudeRecipe = ({recipe}: ClaudeRecipeProps) => {
     return(
         <section className='suggested-recipe-container' aria-live="polite">
-            <h2>Chef Mistril Recommends:</h2>
+            <h2>Chef Mixtral Recommends:</h2>
             <ReactMarkdown>{recipe}</ReactMarkdown>
         </section>
     )
